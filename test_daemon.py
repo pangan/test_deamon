@@ -37,9 +37,18 @@ if __name__ == "__main__":
 		elif 'restart' == sys.argv[1]:
 			logging.info("restarting service")
 			daemon.restart()
+		elif 'status' == sys.argv[1]:
+			pid = daemon.status()
+			if pid:
+				print "Service is running [pid:%s]" %pid
+			else:
+				print "Service is stopped!"
+
+
 		else:
 			print "Unknown command!"
 			sys.exit(2)
+
 		sys.exit(0)
 	else:
 		print "usage: %s start|stop|restart" % sys.argv[0]

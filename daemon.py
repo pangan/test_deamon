@@ -113,6 +113,20 @@ class Daemon:
                                 print str(err)
                                 sys.exit(1)
 
+        def status(self):
+                """
+                Getting daemon status
+                """
+                try:
+                        pf = file(self.pidfile,'r')
+                        pid = int(pf.read().strip())
+                        pf.close()
+                        os.getsid(pid)
+                        return pid
+                except Exception:
+                        return None
+                
+
         def restart(self):
                 """
                 Restart the daemon
