@@ -75,9 +75,10 @@ class Daemon:
 
                 if pid:
                         if self.status():
-                                message = "Daemon already running!\n"
+                                message = "Daemon already running! pidfile %s \n"
                                 sys.stderr.write(message % self.pidfile)
                                 sys.exit(1)
+
                         else:
                                 message = "pidfile %s already exist. But daemon is not running!\n"
                                 
