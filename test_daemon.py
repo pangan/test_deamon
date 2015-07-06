@@ -22,7 +22,7 @@ def test(s):
 	logging.info("%s is greater than %s" %(s,ch))
 
 
-init_log(sys.argv[0])
+init_log('%s.log' %sys.argv[0])
 
 if __name__ == "__main__":
 	daemon = MyDaemon('/tmp/%s.pid'% sys.argv[0])
