@@ -10,8 +10,8 @@ class MyDaemon(Daemon):
 			logging.info("->")
 
 
-def init_log():
-	logging.basicConfig(filename='/var/log/amir.log',level=logging.INFO,
+def init_log(log_file):
+	logging.basicConfig(filename='/var/log/%s'%(log_file),level=logging.INFO,
 	 format="[%(asctime)s][%(levelname)s] %(message)s",
 	 datefmt="%Y-%m-%d %H:%M:%S")
 
@@ -22,10 +22,10 @@ def test(s):
 	logging.info("%s is greater than %s" %(s,ch))
 
 
-init_log()
+init_log(sys.argv[0])
 
 if __name__ == "__main__":
-	daemon = MyDaemon('/tmp/amir.pid')
+	daemon = MyDaemon('/tmp/%s.pid'% sys.argv[0])
 
 	if len(sys.argv) == 2:
 		if 'start' == sys.argv[1]:
@@ -51,7 +51,7 @@ if __name__ == "__main__":
 
 		sys.exit(0)
 	else:
-		print "usage: %s start|stop|restart" % sys.argv[0]
+		print "usage: %s start|stop|restart|status" % sys.argv[0]
 		sys.exit(2)
 
 

@@ -75,8 +75,8 @@ class Daemon:
 
                 if pid:
                         if self.status():
-                                message = "Daemon already running! pidfile %s \n"
-                                sys.stderr.write(message % self.pidfile)
+                                message = "Daemon already running!\n"
+                                sys.stderr.write(message)
                                 sys.exit(1)
 
                         else:
@@ -84,8 +84,12 @@ class Daemon:
                                 
 
                 # Start the daemon
+                
+                message = "Deamon Started! \n"
+                sys.stderr.write(message)
                 self.daemonize()
                 self.run()
+                
 
         def stop(self):
                 """
@@ -117,6 +121,9 @@ class Daemon:
                         else:
                                 print str(err)
                                 sys.exit(1)
+
+                message = "Deamon Stopped! \n"
+                sys.stderr.write(message)
 
         def status(self):
                 """
