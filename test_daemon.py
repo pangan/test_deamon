@@ -30,20 +30,31 @@ if __name__ == "__main__":
 	if len(sys.argv) == 2:
 		if 'start' == sys.argv[1]:
 			logging.info("starting service")
-			daemon.start()
+			try:
+				daemon.start()
+			except Exception, e:
+				logging.error('Shutting down ! %s' %e)
+
 		elif 'stop' == sys.argv[1]:
 			logging.info("stopping service")
-			daemon.stop()
+			try:
+				daemon.stop()
+			except Exception, e:
+				logging.error('Could not stop! %s' %e)
+
 		elif 'restart' == sys.argv[1]:
 			logging.info("restarting service")
-			daemon.restart()
+			try:
+				daemon.restart()
+			except Exception, e:
+				logging.error('Could not restart! %s' %e)
+
 		elif 'status' == sys.argv[1]:
 			pid = daemon.status()
 			if pid:
 				print "Service is running [pid:%s]" %pid
 			else:
 				print "Service is stopped!"
-
 
 		else:
 			print "Unknown command!"
